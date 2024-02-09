@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      terraform: 1.0
+  pre_build:
+    commands:
+      - echo "Pre-Build Phase - Running Terraform Init"
+      - terraform init
+  build:
+    commands:
+      - echo "Build Phase - Running Terraform Apply"
+      - terraform apply -auto-approve
+  post_build:
+    commands:
+      - echo "Post-Build Phase - Running Cleanup"
+      - terraform destroy -auto-approve
+
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: yes
