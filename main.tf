@@ -18,11 +18,3 @@ resource "aws_network_interface_sg_attachment" "sg_attachment" {
   security_group_id    = "sg-095763b3c130900bb"
   network_interface_id = "eni-023ef9e34a6d572c8"
 }
-
-
-resource "github_repository" "terraform_cloud" {
-  name        = "AWS_terraform"
-  description = "Creating repository using Terrafrom top to create a cloud project"
-
-  visibility = "public"
-}
