@@ -12,10 +12,10 @@ phases:
     commands:
       - echo "Build Phase - Running Terraform Apply"
       - terraform apply -auto-approve
-  post_build:
-    commands:
-      - echo "Post-Build Phase - Running Cleanup"
-      - terraform destroy -auto-approve
+  # post_build:
+  #   commands:
+  #     - echo "Post-Build Phase - Running Cleanup"
+  #     - terraform destroy -auto-approve
 
 artifacts:
   files:
