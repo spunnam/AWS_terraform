@@ -5,7 +5,7 @@ resource "aws_instance" "ec2_instance" {
   instance_type = "t2.micro"
   key_name      = "EC2 Practice"
   tags = {
-    Name = "Education_Project"
+    Name = "test instance"
   }
 }
 resource "aws_security_group" "sg" {
