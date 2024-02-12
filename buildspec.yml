@@ -20,6 +20,7 @@ phases:
     commands:
       - echo "Build Phase - Running Terraform Apply"
       - terraform apply -auto-approve
+      - ls -ltr
   # post_build:
   #   commands:
   #     - echo "Post-Build Phase - Running Cleanup"
