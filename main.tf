@@ -15,18 +15,6 @@ resource "aws_instance" "ec2_instance" {
   EOF
 
   tags = {
-    Name = "terraform_instance"
+    Name = "new_terraform_instance"
   }
 }
-# resource "aws_security_group" "sg" {
-#   tags = {
-#     type = "terraform-test-security-group"
-#   }
-# }
-
-
-
-# resource "aws_network_interface_sg_attachment" "sg_attachment" {
-#   security_group_id    = "sg-095763b3c130900bb"
-#   network_interface_id = "eni-023ef9e34a6d572c8"
-# }
