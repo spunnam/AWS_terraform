@@ -14,7 +14,9 @@ resource "aws_instance" "ec2_instance" {
   yum install -y httpd
   systemctl start httpd
   systemctl enable httpd
-  echo "<h1>Hello World from $(hostname -f)</h1>" > /var/www/html/index.html
+  sudo rm /var/www/html/index.html
+  aws s3 cp s3://demo-bucket-891377224694/index.html index.html
+  sudo mv /home/ec2-user/index.html /var/www/html/
   EOF
 
   tags = {
