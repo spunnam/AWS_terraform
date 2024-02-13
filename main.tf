@@ -1,4 +1,6 @@
 # main.tf
+
+# EC2 Instance
 resource "aws_instance" "ec2_instance" {
   ami                    = "ami-0e731c8a588258d0d"
   subnet_id              = "subnet-0ad8498fde7ac062d"
@@ -9,7 +11,7 @@ resource "aws_instance" "ec2_instance" {
 
   user_data = <<-EOF
     #!/bin/bash
-    # Use this for your user data (script from top to bottom)
+    # User data script to configure the EC2 instance
     
     # Install AWS CLI
     yum install -y aws-cli
@@ -35,12 +37,12 @@ resource "aws_instance" "ec2_instance" {
     systemctl restart httpd
   EOF
 
-
   tags = {
     Name = "new_terraform_instance"
   }
 }
 
+# Application Load Balancer (ALB)
 resource "aws_lb" "lb_practice" {
   name                       = "test-lb-tf"
   internal                   = false
@@ -49,6 +51,7 @@ resource "aws_lb" "lb_practice" {
   subnets                    = ["subnet-086a4f95acf0fd771", "subnet-0c5d8cda9bbac7918", "subnet-0ad8498fde7ac062d"]
   enable_deletion_protection = true
 
+  # Access logs configuration (optional)
   # access_logs {
   #   bucket  = aws_s3_bucket.lb_logs.id
   #   prefix  = "test-lb"
@@ -56,7 +59,7 @@ resource "aws_lb" "lb_practice" {
   # }
 }
 
-# Create a target group
+# Target Group for ALB
 resource "aws_lb_target_group" "test_lb_tg" {
   name        = "alb-target-group"
   port        = 80
@@ -65,21 +68,21 @@ resource "aws_lb_target_group" "test_lb_tg" {
   target_type = "instance"
 }
 
-# Attach the target group to the ALB
+# Listener for ALB
 resource "aws_lb_listener" "lb_practice" {
   load_balancer_arn = aws_lb.lb_practice.arn
   port              = 80
   protocol          = "HTTP"
 
   default_action {
-    target_group_arn = aws_lb_target_group.example.arn
+    target_group_arn = aws_lb_target_group.test_lb_tg.arn
     type             = "forward"
   }
 }
+
+# Target Group Attachment
 resource "aws_lb_target_group_attachment" "example" {
   count            = 1
   target_group_arn = aws_lb_target_group.test_lb_tg.arn
   target_id        = aws_instance.ec2_instance.id
 }
-
-
