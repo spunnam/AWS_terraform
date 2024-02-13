@@ -49,11 +49,11 @@ resource "aws_lb" "lb_practice" {
   subnets                    = ["subnet-086a4f95acf0fd771", "subnet-0c5d8cda9bbac7918", "subnet-0ad8498fde7ac062d"]
   enable_deletion_protection = true
 
-  access_logs {
-    bucket  = aws_s3_bucket.lb_logs.id
-    prefix  = "test-lb"
-    enabled = true
-  }
+  # access_logs {
+  #   bucket  = aws_s3_bucket.lb_logs.id
+  #   prefix  = "test-lb"
+  #   enabled = true
+  # }
 }
 
 # Create a target group
