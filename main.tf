@@ -3,6 +3,7 @@ resource "aws_instance" "ec2_instance" {
   ami                    = "ami-0e731c8a588258d0d"
   subnet_id              = "subnet-0ad8498fde7ac062d"
   instance_type          = "t2.micro"
+  iam_instance_profile   = "DemoRoleForEC2"
   key_name               = "EC2 Practice"
   vpc_security_group_ids = ["sg-095763b3c130900bb"]
 
