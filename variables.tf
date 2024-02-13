@@ -10,3 +10,11 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
+# variables.tf
+variable "public_subnet_ids" {
+  type        = list(string)
+  description = "List of public subnet IDs"
+  default     = ["subnet-086a4f95acf0fd771", "subnet-0c5d8cda9bbac7918", "subnet-0ad8498fde7ac062d"]
+}
+
+
